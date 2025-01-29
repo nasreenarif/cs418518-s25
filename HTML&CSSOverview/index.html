@@ -17,10 +17,22 @@
     </style> -->
     <link rel="stylesheet" href="style.css"/>
     <script src="script.js" type="module"></script>
+    <script>
+        function SayHello()
+        {
+            alert('Hello CS418 Class!');
+        }
+    </script>
 </head>
 <body>
     <img src="web-programming.webp" alt="Description">
     <p id="course-name">Web Programming Class</p>
     <P style="color: green">HTML & CSS Overview</P>
+    <!-- Named Function -->
+     
+    <button onclick="SayHello()"> Click me!</button>
+
+    <!-- Arrow Functions -->
+    <button onclick="(()=>{alert('Invoke anonymous function!')})()"> Click me!</button>
 </body>
 </html>
