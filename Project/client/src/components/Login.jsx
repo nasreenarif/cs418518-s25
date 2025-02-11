@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom'; // useNavigate hook for redirection
 import "./Login.css";
 
 export default function Login() {
     const [enteredEmail, setEnteredEmail] = useState("");
     const [enteredPassword, setEnteredPassword] = useState("");
     const [submitted, setSubmitted] = useState(false);  
+    const navigate = useNavigate(); // Hook for programmatic navigation
+
 
     function handleInputChange(identifier, value) {
         if (identifier === "email") {
@@ -17,7 +20,10 @@ export default function Login() {
     const handleLogin =  () => {
         setSubmitted(true);  
         if(enteredEmail!="")      
-        alert('Email:' +enteredEmail);
+        // alert('Email:' +enteredEmail);
+
+        navigate('/dashboard');
+
                 
     };
 

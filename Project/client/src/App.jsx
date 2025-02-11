@@ -1,5 +1,7 @@
-import './App.css'
-import Login from './components/Login'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import './App.css';
+import Dashboard from './components/Dashboad';
+import Login from './components/Login';
 
 
 
@@ -10,7 +12,16 @@ function App() {
   return (
     <>
 
-    <Login></Login>
+<Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        {/* Default route */}
+        <Route path="/" element={<Login />} /> 
+      </Routes>
+    </Router>
+
+    {/* <Login></Login> */}
     {/* <Courses title="CS418" description="Web Programming">
       <h3>React Class - Project Setup</h3>
       <p>Testing children props</p>
