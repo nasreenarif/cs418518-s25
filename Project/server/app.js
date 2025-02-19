@@ -1,6 +1,7 @@
 // console.log("Hello World!");
 
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import express from 'express';
 import user from './routes/user.js';
 const app=express();
@@ -16,7 +17,10 @@ app.listen(port,()=>{
     console.log(`Server is listening at port ${port}`);
 });
 
-
+app.use(cors({
+    origin:'http://localhost:5173', // *
+    allowedHeaders:['Content-Type'] // optional
+}))
 app.use(myLogger);
 app.use(bodyParser.json());
 

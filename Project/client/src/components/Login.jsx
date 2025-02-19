@@ -17,13 +17,32 @@ export default function Login() {
         }
     }
 
-    const handleLogin =  () => {
+    const handleLogin =  async() => {
+        
         setSubmitted(true);  
-        if(enteredEmail!="")      
+
+        const formBody= JSON.stringify({
+            Email:enteredEmail,
+            Password:enteredPassword
+        })
+
+        const response= await fetch('http://localhost:8080/user/login',{
+            method:'POST',
+            body:formBody,
+            headers:{
+                "content-type":"application/json"
+            }
+        })
+
+        if(response.ok)
+        {
+            const result=await response.json();
+            console.log(result);
+            navigate('/dashboard');
+        }
+
+        // if(enteredEmail!="")      
         // alert('Email:' +enteredEmail);
-
-        navigate('/dashboard');
-
                 
     };
 
