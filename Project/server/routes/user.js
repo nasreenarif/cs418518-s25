@@ -1,5 +1,7 @@
 import { Router } from "express";
 import connection from "../database/database.js";
+import { ComparePassword, HashedPassword } from "../utils/helper.js";
+import { sendEmail } from "../utils/mailer.js";
 const user = Router();
 
 //CRUD
@@ -31,13 +33,16 @@ user.get("/:id", (req, res) => {
 
 //get user by id
 user.post("/", (req, res) => {
+
+  const hashedPassword = HashedPassword(req.body.Password);
+
   connection.execute(
     "insert into user_information (u_first_name,u_last_name,u_email,u_password,is_admin) values (?,?,?,?,?)",
     [
       req.body.FirstName,
       req.body.LastName,
       req.body.Email,
-      req.body.Password,
+      hashedPassword,//req.body.Password,
       req.body.IsAdmin,
     ],
     function (err, result) {
@@ -57,9 +62,9 @@ user.post("/", (req, res) => {
 
 user.put("/:id", (req, res) => {
   connection.execute(
-    "update user_information set u_first_name=?, u_last_name=? where u_id=?",[
-      req.body.FirstName, req.body.LastName, req.params.id
-    ],
+    "update user_information set u_first_name=?, u_last_name=? where u_id=?", [
+    req.body.FirstName, req.body.LastName, req.params.id
+  ],
     function (err, result) {
       if (err) {
         res.send(err);
@@ -78,9 +83,9 @@ user.put("/:id", (req, res) => {
 
 user.delete("/:id", (req, res) => {
   connection.execute(
-    "delete from user_information where u_id=?",[
-      req.params.id
-    ],
+    "delete from user_information where u_id=?", [
+    req.params.id
+  ],
     function (err, result) {
       if (err) {
         res.send(err);
@@ -99,21 +104,37 @@ user.delete("/:id", (req, res) => {
 
 user.post("/login", (req, res) => {
   connection.execute(
-    "select * from user_information where u_email=? and u_password=?",
-    [      
+    "select * from user_information where u_email=?",// and u_password=?",
+    [
       req.body.Email,
-      req.body.Password,
+      // req.body.Password,
     ],
     function (err, result) {
       if (err) {
+        console.log("Error");
         res.send(err);
       } else {
-        if(result.length==1)
-        res.json({
-          status: 200,
-          message: "User loggedIn successfully!",
-          data: result,
-        });
+        if (result.length == 1) {
+          // console.log("Result");
+          const hashedPassword = result[0].u_password;
+
+          if (ComparePassword(req.body.Password, hashedPassword)) {
+
+            sendEmail(req.body.Email,"Login OTP Verification","Your OTP is 1234");
+
+            res.json({
+              status: 200,
+              message: "User loggedIn successfully!",
+              data: result,
+            });
+          }
+          else {
+            res.json({
+              status: 403,
+              message: "Password is not correct",
+            });
+          }
+        }
       }
     }
   );
