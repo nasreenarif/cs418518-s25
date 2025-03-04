@@ -46,12 +46,6 @@ To install all required packages, navigate to the backend folder and run:
 ```sh
 npm install
 
-
-```md
-### **Install Backend Dependencies**  
-To install all required packages, navigate to the backend folder and run:  
-```sh
-npm install
 ```
 
 ### **Run the Backend**  
@@ -60,4 +54,33 @@ Start the backend server with the following command:
 npm run dev
 ```
 This will run the backend on **port 3001**.
+```
+
+
+## **Frontend Setup**
+
+### ** Checkout to the Frontend Branch**  
+Switch to the frontend branch where the frontend code is maintained:  
+```sh
+git checkout frontend
+```
+
+### ** Install Frontend Dependencies**  
+Move into the frontend directory and install the required packages:  
+```sh
+npm install
+```
+
+### ** Run the Frontend**  
+Start the frontend development server with:  
+```sh
+npm  run start
+```
+This will run the frontend on **port 3000**.
+
+### ** Optional: Build the Frontend**  
+If you need to create a production build, use:  
+```sh
+npm run build
+```
 ```
