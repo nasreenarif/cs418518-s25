@@ -10,17 +10,17 @@ This project is a **Student Advisory Portal** designed to facilitate student-adv
 
 ## **🚀 How to Set Up and Run the Project**
 
-### **1️⃣ Clone the Repository**
+### ** Clone the Repository**
 To start working on this project, clone the GitHub repository using the following command:
 ```sh
 git clone https://github.com/VaishnaviLashkar/cs418518-s25.git
-
-### **2️⃣ Navigate into the Project Directory**
+```sh
+### ** Navigate into the Project Directory**
 Once the repository is cloned, move into the project folder using:
 ```sh
 cd cs418518-s25
 
-### **3️⃣ Checkout to the Backend Branch**  
+### ** Checkout to the Backend Branch**  
 Switch to the backend branch where the backend code is maintained:  
 ```sh
 git checkout backend
