@@ -3,6 +3,8 @@
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
+import session from 'express-session';
+import dashboard from './routes/dashboard.js';
 import user from './routes/user.js';
 const app=express();
 const port=8080;
@@ -19,8 +21,22 @@ app.listen(port,()=>{
 
 app.use(cors({
     origin:'http://localhost:5173', // *
-    allowedHeaders:['Content-Type'] // optional
+    allowedHeaders:['Content-Type'], // optional
+    credentials:true
 }))
+
+app.use(session({
+    secret:'secret123',
+    saveUninitialized:true,
+    resave:false,
+    cookie:{
+        secure:false,
+        httpOnly:true,
+        maxAge:3600000,
+        sameSite:'lax' //This allow cookies for different oririgin
+    }
+}))
+
 app.use(myLogger);
 app.use(bodyParser.json());
 
@@ -30,6 +46,7 @@ app.get('/',(req,res)=>{
 })
 
 app.use('/user',user);
+app.use('/dashboard',dashboard);
 
 app.get('/:id',(req,res)=>{
     // res.send("Hello World!");

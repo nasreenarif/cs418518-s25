@@ -1,7 +1,6 @@
 import { Router } from "express";
 import connection from "../database/database.js";
 import { ComparePassword, HashedPassword } from "../utils/helper.js";
-import { sendEmail } from "../utils/mailer.js";
 const user = Router();
 
 //CRUD
@@ -120,8 +119,8 @@ user.post("/login", (req, res) => {
 
           if (ComparePassword(req.body.Password, hashedPassword)) {
 
-            sendEmail(req.body.Email,"Login OTP Verification","Your OTP is 1234");
-
+            // sendEmail(req.body.Email,"Login OTP Verification","Your OTP is 1234");
+            req.session.user=result[0];
             res.json({
               status: 200,
               message: "User loggedIn successfully!",

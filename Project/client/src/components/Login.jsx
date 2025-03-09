@@ -1,3 +1,4 @@
+import cookie from 'js-cookie';
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom'; // useNavigate hook for redirection
 import "./Login.css";
@@ -28,6 +29,7 @@ export default function Login() {
 
         const response= await fetch('http://localhost:8080/user/login',{
             method:'POST',
+            credentials:'include',
             body:formBody,
             headers:{
                 "content-type":"application/json"
@@ -38,6 +40,7 @@ export default function Login() {
         {
             const result=await response.json();
             console.log(result);
+            cookie.set('isLoggedIn',true);
             navigate('/dashboard');
         }
 
