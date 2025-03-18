@@ -20,7 +20,7 @@ app.listen(port,()=>{
 });
 
 app.use(cors({
-    origin:'http://localhost:5173', // *
+    origin:process.env.CROSS_ORIGIN, // *
     allowedHeaders:['Content-Type'], // optional
     credentials:true
 }))
