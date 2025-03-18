@@ -5,7 +5,7 @@ export default function Dashboard() {
 
     const callUserInfo = async () => {
         try {
-            const response = await fetch("http://localhost:8080/dashboard/", {
+            const response = await fetch(import.meta.env.VITE_API_KEY+"dashboard/", {
                 method: "GET",
                 credentials: 'include',
                 headers: {
