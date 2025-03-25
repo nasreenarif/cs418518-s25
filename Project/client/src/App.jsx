@@ -1,7 +1,10 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import Dashboard from './components/Dashboad';
+import HookDemo from './components/HookDemo';
 import Login from './components/Login';
+import SaveButton from './components/SaveButton';
+import StatusBar from './components/StatusBar';
 
 
 
@@ -16,6 +19,9 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/statusbar" element={<StatusBar />} />
+        <Route path="/hookdemo" element={<HookDemo />} />
+        <Route path="/savebutton" element={<SaveButton />} />
         {/* Default route */}
         <Route path="/" element={<Login />} /> 
       </Routes>

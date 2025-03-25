@@ -29,6 +29,9 @@ export default function Dashboard() {
         callUserInfo(); // Fetch user info on component mount
     }, []); // Empty dependency array to run once when the component mounts
 
+
+   
+
     return (
         <div id="dashboard">
             <h1>Welcome! </h1>
