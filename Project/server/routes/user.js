@@ -103,7 +103,7 @@ user.delete("/:id", (req, res) => {
 
 user.post("/login", (req, res) => {
   connection.execute(
-    "select * from user_information where u_email=?",// and u_password=?",
+    "select * from course_advising.user_information where u_email=?",// and u_password=?",
     [
       req.body.Email,
       // req.body.Password,
@@ -113,7 +113,7 @@ user.post("/login", (req, res) => {
         console.log("Error");
         res.send(err);
       } else {
-        if (result.length == 1) {
+        if (result.length == 0) {
           // console.log("Result");
           const hashedPassword = result[0].u_password;
 
@@ -133,6 +133,12 @@ user.post("/login", (req, res) => {
               message: "Password is not correct",
             });
           }
+        }
+        else {
+          res.json({
+            status: 403,
+            message: "Password is not correct",
+          });
         }
       }
     }
